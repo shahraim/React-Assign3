@@ -18,7 +18,7 @@
 .main {
     height: 100vh;
     max-height: 90.7vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url(./img/background.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.60), rgba(0, 0, 0, 0.60)), url(./img/background.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -126,7 +126,7 @@
 .login-form button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4caf50;
+    background-color: #2b2727;
     color: white;
     border: none;
     border-radius: 5px;
@@ -134,7 +134,7 @@
 }
 
 .login-form button:hover {
-    background-color: #45a049;
+    background-color: #000000;
 }
 
 .login-form p {
@@ -193,7 +193,7 @@
 .register-form button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4caf50;
+    background-color: #2b2727;
     color: white;
     border: none;
     border-radius: 5px;
@@ -201,7 +201,7 @@
 }
 
 .register-form button:hover {
-    background-color: #45a049;
+    background-color: #000000;
 }
 
 .register-form p {
