@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import logo from '../src/img/logo.png';
 import Home from './components/nested components/Home';
@@ -10,11 +9,14 @@ import { Routes, Route } from 'react-router-dom';
 import title from '../src/img/title.png';
 import './App.css';
 import Footer from './components/Footer';
+import Error from './components/Error';
 import User from './components/User';
 import WeeklyD from './components/nested components/WeeklyD';
 import MonthlyD from './components/nested components/MonthlyD';
 import Register from './components/nested components/Register';
 import Login from './components/nested components/Login';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -38,7 +40,7 @@ function App() {
   ];
 
   return (
-    <div>
+    <div className='main-content'>
       <Navbar logo={logo} navLinks={navLinks} isLoggedIn={isLoggedIn} userName={userName} onLogout={handleLogout} />
 
       <Routes>
@@ -49,12 +51,14 @@ function App() {
           <Route path="weeklyD" element={<WeeklyD />} />
           <Route path="monthlyD" element={<MonthlyD />} />
         </Route>
-        <Route path="/user" element={<User userName={userName} />} />
+        <Route path="/user" element={<User userName={userName} isLoggedIn={isLoggedIn} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/*" element={<Error />} />
       </Routes>
 
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

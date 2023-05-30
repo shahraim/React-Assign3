@@ -1,10 +1,14 @@
 import React from 'react';
+import Error from './Error';
+import Unauthen from './Unauthen';
 
-function User({ userName }) {
+function User({ userName, isLoggedIn }) {
   return (
     <div className="user container">
-      <h1>Hi, {userName}</h1>
-      {/* Add your user profile content here */}
+      {isLoggedIn ? (
+        <h1>Hi, {userName}</h1>
+      ) : (<Unauthen />)
+      }
     </div>
   );
 }

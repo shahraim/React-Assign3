@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Login({ onLogin }) {
     const [email, setEmail] = useState('');
@@ -20,7 +21,7 @@ function Login({ onLogin }) {
                 onLogin(name);
                 history('/user');
             } else {
-                alert('Invalid email or password');
+                toast.warn('Invalid email or password');
             }
         } else {
             alert('Please enter valid credentials');

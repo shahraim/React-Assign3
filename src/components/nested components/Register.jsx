@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [forumError, setForumError] = useState('');
 
     const handleSubmit = (e) => {
-        setName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
         e.preventDefault();
 
         if (email && password && name) {
@@ -22,15 +19,19 @@ function Register() {
             const userExists = users.some((user) => user.email === email);
 
             if (userExists) {
-                alert('Email already registered');
+                setForumError('Email already registered');
+                setEmail('')
             } else if (userExist) {
-                alert('Name already registered');
+                setForumError('Name already registered');
+                setName('')
             } else if (password.length < 8) {
-                setPasswordError('Password should be at least 8 characters long');
+                setForumError('Password should be at least 8 characters long');
             } else if (!/[A-Z]/.test(password)) {
-                setPasswordError('Password should contain at least one uppercase letter');
+                setForumError('Password should contain at least one uppercase letter');
+                setPassword('')
+                setConfirmPassword('')
             } else if (password !== confirmPassword) {
-                setPasswordError('Passwords do not match');
+                setForumError('Passwords do not match');
             } else {
                 // Add user to local storage
                 const newUser = { name, email, password };
@@ -38,7 +39,12 @@ function Register() {
                 localStorage.setItem('users', JSON.stringify(users));
 
                 // Redirect the user to the home page or perform any desired action
-                alert('Registration successful');
+                toast.success('Registration successful');
+                setEmail('')
+                setName('')
+                setPassword('')
+                setConfirmPassword('')
+                setForumError('')
                 // Add your desired logic for switching to the user profile page here
             }
         } else {
@@ -91,7 +97,7 @@ function Register() {
                         placeholder="********"
                         required
                     />
-                    {passwordError && <p className="error-message">{passwordError}</p>}
+                    {forumError && <p className="error-message">{forumError}</p>}
                     <button type="submit">Register</button>
                 </form>
                 <p>

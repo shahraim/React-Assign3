@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar({ logo, navLinks, isLoggedIn, userName, onLogout }) {
   return (
-    <div>
+    <div className='nvbar'>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
