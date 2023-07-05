@@ -1,5 +1,5 @@
 import React from 'react';
-import Error from './Error';
+// import Error from './Error';
 import Unauthen from './Unauthen';
 
 function User({ userName, isLoggedIn }) {

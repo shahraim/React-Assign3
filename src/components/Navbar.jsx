@@ -25,7 +25,7 @@ function Navbar({ logo, navLinks, isLoggedIn, userName, onLogout }) {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {navLinks.map((link) => (
                 <li className="nav-item" key={link.to}>
-                  <NavLink className="nav-link" activeClassName="active" to={link.to}>
+                  <NavLink className="nav-link" activeclassname="active" to={link.to}>
                     {link.label}
                   </NavLink>
                 </li>
@@ -47,14 +47,14 @@ function Navbar({ logo, navLinks, isLoggedIn, userName, onLogout }) {
                   {isLoggedIn ? (
                     <>
                       <li>
-                        <NavLink className="dropdown-item" activeClassName="active" to="/user">
+                        <NavLink className="dropdown-item" activeclassname="active" to="/user">
                           Profile
                         </NavLink>
                       </li>
                       <li>
                         <NavLink
                           className="dropdown-item"
-                          activeClassName="active"
+                          activeclassname="active"
                           to="/"
                           onClick={onLogout}
                         >
@@ -65,12 +65,12 @@ function Navbar({ logo, navLinks, isLoggedIn, userName, onLogout }) {
                   ) : (
                     <>
                       {/* <li>
-                        <NavLink className="dropdown-item" activeClassName="active" to="/login">
+                        <NavLink className="dropdown-item" activeclassname="active" to="/login">
                           Login
                         </NavLink>
                       </li> */}
                       <li>
-                        <NavLink className="dropdown-item" activeClassName="active" to="/register">
+                        <NavLink className="dropdown-item" activeclassname="active" to="/register">
                           Signup
                         </NavLink>
                       </li>

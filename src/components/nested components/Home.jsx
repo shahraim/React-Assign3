@@ -6,7 +6,7 @@ function Home(props) {
             <div className="container">
                 <div className="row justify-content-center align-items-center">
                     <div className="col-6 col-md-4 text-center">
-                        <img src={props.title} alt="main-image" className="img-fluid" />
+                        <img src={props.title} alt="main-img" className="img-fluid" />
                     </div>
                     <div className="col-12 text-center">
                         <h6>Check Our Deals to Buy UC</h6>
