@@ -1,65 +1,98 @@
 const express = require('express');
-const { uid } = require('uid');
+const mongoose = require('mongoose');
 const cors = require('cors');
+// const User = require('./models/User');
+
 const app = express();
 const port = 6246;
 
 app.use(cors());
-
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send("hello");
+app.get('/user', async (req, res) => {
+    try {
+        const newUser = await User.find();
+        res.json(newUser);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
-const user = [
-    {
-        id: 1111111111111111,
-        name: "shahraim",
-        email: "shahraim.khan27112002@gmail.com",
-        password: "A12345678",
-        ConfirmPassword: "A12345678"
+const userSchema = new mongoose.Schema({
+    name: {
+        required: true,
+        type: String
+    },
+    email: {
+        required: true,
+        type: String
+    },
+    password: {
+        required: true,
+        type: String
+    },
+    confirmPassword: {
+        required: true,
+        type: String
     }
-];
+});
 
-app.post('/register', (req, res) => {
+const User = mongoose.model('UserLists', userSchema);
+
+app.post('/register', async (req, res) => {
     const { email, password, confirmPassword } = req.body;
     console.log(req.body);
 
-    const userFound = user.find((obj) => obj.email === email);
+    const userFound = await User.findOne({ email });
     if (userFound) {
-        return res.status(400).json({ message: "error: Email already registered" });
+        return res.status(400).json({ message: "Error: Email already registered" });
     } else if (password.length < 8) {
-        return res.status(400).json({ message: 'Password should be at least 8 characters long' });
+        return res.status(400).json({ message: 'Error: Password should be at least 8 characters long' });
     } else if (!/[A-Z]/.test(password)) {
-        return res.status(400).json({ message: 'Password should contain at least one uppercase letter' });
+        return res.status(400).json({ message: 'Error: Password should contain at least one uppercase letter' });
     } else if (password !== confirmPassword) {
-        return res.status(400).json({ message: 'Passwords do not match' });
+        return res.status(400).json({ message: 'Error: Passwords do not match' });
     } else {
-        user.push({ ...req.body, id: uid(16) });
-        return res.status(200).json(user);
+        const newUser = new User({ ...req.body });
+        newUser.save()
+            .then((savedUser) => {
+                return res.status(200).json(savedUser);
+            })
+            .catch((error) => {
+                console.log('Error saving user to the database:', error);
+                return res.status(500).json({ message: 'Error: Failed to save user to the database' });
+            });
     }
-
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     console.log(req.body);
 
-    userFound = user.find((obj) => obj.email === email)
+    const userFound = await User.findOne({ email });
     if (!userFound) {
-        return res.status(404).send({ message: "User Not Found" });
+        return res.status(404).json({ message: "User Not Found" });
+    } else if (userFound.password !== password) {
+        return res.status(401).json({ message: "Incorrect Password" });
+    } else {
+        return res.status(200).json({ message: "Login Successfully", user: userFound });
     }
-    else if (userFound.password !== password) {
-        return res.status(401).send({ message: "Incorrect Password" })
-    }
-    else {
-        return res.status(200).send({ message: "Login Succesfully", user: userFound });
-    }
-
 });
-
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
+});
+
+const DATABASE_URL = "mongodb+srv://shahraimkhan:MSKN-6247@cluster0.zerzinh.mongodb.net/Signup-Users";
+const mongoString = DATABASE_URL;
+
+mongoose.connect(mongoString);
+const database = mongoose.connection;
+
+database.on('error', (error) => {
+    console.log('Database connection error:', error);
+});
+
+database.once('open', () => {
+    console.log('Database Connected');
 });
