@@ -79,6 +79,24 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.put('/user', async (req, res) => {
+    const { userId, name } = req.body;
+
+    try {
+        const user = await User.findByIdAndUpdate(userId, { name }, { new: true });
+        if (!user) {
+            return res.status(404).json({ message: "User Not Found" });
+        }
+        return res.status(200).json({ message: "User name updated successfully", user });
+    } catch (error) {
+        console.log('Error updating user:', error);
+        return res.status(500).json({ message: 'Error: Failed to update user' });
+    }
+});
+
+
+  
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

@@ -7,7 +7,7 @@ function Navbar({ logo, navLinks, isLoggedIn, userName, onLogout }) {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <NavLink className="navbar-brand" to="/">
-          {/* <img className='LogoEdit' src="https://www.kindpng.com/picc/m/121-1219644_pubg-png-logo-hd-transparent-png.png" alt="Pubg Png Logo Hd, Transparent Png@kindpng.com"/> */}
+            {/* <img className='LogoEdit' src="https://www.kindpng.com/picc/m/121-1219644_pubg-png-logo-hd-transparent-png.png" alt="Pubg Png Logo Hd, Transparent Png@kindpng.com"/> */}
             <img className="LogoEdit" src={logo} alt="logoImage" />
           </NavLink>
           <button
@@ -50,6 +50,7 @@ function Navbar({ logo, navLinks, isLoggedIn, userName, onLogout }) {
                         <NavLink className="dropdown-item" activeclassname="active" to="/user">
                           Profile
                         </NavLink>
+                        <NavLink className="dropdown-item" activeclassname="active" to="/setting">Setting</NavLink>
                       </li>
                       <li>
                         <NavLink

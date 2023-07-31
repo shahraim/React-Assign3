@@ -17,6 +17,7 @@ import Register from './components/nested components/Register';
 import Login from './components/nested components/Login';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Settings from './components/Settings';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,6 +53,7 @@ function App() {
           <Route path="monthlyD" element={<MonthlyD />} />
         </Route>
         <Route path="/user" element={<User userName={userName} isLoggedIn={isLoggedIn} />} />
+        <Route path="/setting" element={<Settings userName={userName} isLoggedIn={isLoggedIn}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/*" element={<Error />} />

@@ -10,7 +10,6 @@ function User({ userName, isLoggedIn }) {
         <>
           <h1>Hi, {userName}</h1>
           <br />
-          <Settings />
         </>
       ) : (<Unauthen />)
       }
